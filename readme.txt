@@ -35,7 +35,7 @@ We suggest use of the ‘cat’ tool for combining fastq files.
 
 	cat [seq-pair_1.fastq] [seq-pair_2.fastq] [single.fastq] … > [pipeline_input.fastq]
 
-In this example, [seq-pair_1.fastq] and [seq-pair_2.fastq] are your paired-end read files, [single.fastq] may be a single-end read file for the same individual, and [pipeline_input.fastq] is the name of the input file for the pipeline.  Once you have your input and the reference genome of your choice, make sure they are in the same working directory as both ‘pdn_processing.txt’ and ‘pdn_manifest’.  You can run either pipeline with the following script.
+In this example, [seq-pair_1.fastq] and [seq-pair_2.fastq] are your paired-end read files, [single.fastq] may be a single-end read file for the same individual, and [pipeline_input.fastq] is the name of the input file for the pipeline.  Once you have your input and the reference genome of your choice, make sure they are in the same working directory as both ‘pdn_processing_M*.txt’ and ‘pdn_manifest’.  You can run either pipeline with the following script.
 
 	bash pdn_processing_M*.txt
 
