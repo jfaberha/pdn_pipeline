@@ -1,0 +1,65 @@
+#Prompts for input fastq sequence reads and reference genome.
+echo "Please enter project name: "
+read project
+echo "Please enter raw sequence fastq prefix: "
+read paired
+echo "Please enter sequencing technology: "
+read tech
+echo "Please enter genome fasta file name: "
+read genome
+mkdir ${project}
+scp ${genome} ${project}
+scp ${paired}.fastq ${project}
+sed "s/seqtech/$tech/g" pdn_manifest.txt >&./${project}/pdn_manifest.txt
+cd ./${project}
+bowtie2-build ${genome} db_index
+
+#Bowtie2 alignment step. Add parameters if necessary but do not change variable names.
+bowtie2 -x db_index -U ${paired}.fastq -S ${paired}_in_genome --un ${paired}_unaligned.fastq --threads 5 >&log_align_genome.txt
+
+#Preprocessing and Mira assembly steps.  Adjust Mira parameters in manifest file.
+gzip ${paired}_unaligned.fastq
+zcat ${paired}_unaligned.fastq.gz | awk '{print (NR%4 == 1) ? "@1_" ++i : $0}' | gzip -c > unaligned_in.fastq.gz
+gunzip unaligned_in.fastq.gz
+mira pdn_manifest.txt
+gzip unaligned_in.fastq
+
+#Realign raw reads to assembly for mapping.
+bowtie2-build ./unaligned_assembly/unaligned_d_results/unaligned_out.unpadded.fasta assembly_index
+gunzip ${paired}_unaligned.fastq.gz
+bowtie2 -x assembly_index -U ${paired}_unaligned.fastq -S ${paired}_in_assembly --threads 5 >&log_align_assembly.txt
+gzip ${paired}_unaligned.fastq
+
+#Generate map coordinates through cross-referencing of SAM alignment outputs.
+echo "  "
+echo "Now mapping your contigs."
+awk '{print $1, $3, $4, $5}' ${paired}_in_genome >&pairs_in_genome
+awk '{print $1, $3, $4, $5}' ${paired}_in_assembly >&pairs_in_assembly
+sed '/*/d' ./pairs_in_genome >&pairs_in_genome_edit
+sed '/*/d' ./pairs_in_assembly >&pairs_in_assembly_edit
+sed '/@/d' ./pairs_in_genome_edit >&pairs_in_genome_edit2
+sed '/@/d' ./pairs_in_assembly_edit >&pairs_in_assembly_edit2
+gzip ${paired}_in_genome
+gzip ${paired}_in_assembly
+sed 's:/1::g' pairs_in_genome_edit2 >&pairs_in_genome_edit3
+sed 's:/2::g' pairs_in_genome_edit3 >&pairs_in_genome_edit4
+sed 's:/1::g' pairs_in_assembly_edit2 >&pairs_in_assembly_edit3
+sed 's:/2::g' pairs_in_assembly_edit3 >&pairs_in_assembly_edit4
+sort -u -t" " -k1,1 pairs_in_genome_edit4 >&pairs_in_genome_1end
+sort -u -t" " -k1,1 pairs_in_assembly_edit4 >&pairs_in_assembly_1end
+cat pairs_in_assembly_1end pairs_in_genome_1end > loci
+sort loci >&loci_sort
+awk '{print $2, $3, $4, $1}' loci_sort >&loci_sort_edit
+uniq -D -f 3 loci_sort_edit >&loci_pairs
+paste -s -d' \n' loci_pairs >&loci_append
+awk '{print $5, $1, $6, $7, $2, $3}' loci_append >&loci_predicted
+sort loci_predicted >&loci_nearfinal
+awk '{print $1, $3, $4, $2, $5, $6}' loci_nearfinal >&predicted_loci.txt
+rm loci*
+rm pairs*
+rm *_index*
+rm ${genome}
+rm ${paired}.fastq
+rm pdn_manifest.txt
+echo "  "
+echo "Thank you, pseudo-denovo assembly is finished."

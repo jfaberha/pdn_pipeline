@@ -1,0 +1,7 @@
+project = unaligned
+job = genome,denovo,accurate
+readgroup = unaligned
+data = unaligned_in.fastq
+parameters = -GE:not=4
+technology = seqtech
+
