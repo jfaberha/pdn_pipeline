@@ -37,7 +37,7 @@ We suggest use of the ‘cat’ tool for combining fastq files.
 
 In this example, [seq-pair_1.fastq] and [seq-pair_2.fastq] are your paired-end read files, [single.fastq] may be a single-end read file for the same individual, and [pipeline_input.fastq] is the name of the input file for the pipeline.  Once you have your input and the reference genome of your choice, make sure they are in the same working directory as both ‘pdn_processing.txt’ and ‘pdn_manifest’.  You can run either pipeline with the following script.
 
-	bash pnd_processing_M*.txt
+	bash pdn_processing_M*.txt
 
 Choose ‘pdn_processing_M3.txt’ or ‘pdn_processing_M4.txt’ depending on the version of Mira you have installed.  The pipeline will prompt you for 4 variables.  First, enter the name of your project, which will serve as the name of your output folder.  Second, enter the prefix of your fastq input file, for example if your input is named ‘pipeline_input.fastq’ enter ‘pipeline_input’.  Third, enter the sequencing technology based on Mira3 syntax (i.e. ‘solexa’, ‘iontor’, etc).  Fourth, enter the full name of your reference genome in fasta format. 
 
@@ -59,7 +59,7 @@ Mapping steps only
 ------------------
 You may want to map de-novo assembled contigs to a reference genome but prefer other sequence alignment or assembly software than Bowtie2 or Mira.  If this is the case, we’ve also included the ‘pdn_mapping.txt’ script.  This script requires only 2 input files, specifically SAM format alignment files of combined paired-end raw sequences in both your assembly (1) and genome (2).  To run this pipeline, you can enter the following command.
 
-	bash pnd_mapping.txt
+	bash pdn_mapping.txt
 
 Enter the full names of your SAM files when prompted, and the pipeline will do the rest.
 
