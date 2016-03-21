@@ -39,7 +39,7 @@ In this example, [seq-pair_1.fastq] and [seq-pair_2.fastq] are your paired-end r
 
 	bash pdn_processing_M*.txt
 
-Choose ‘pdn_processing_M3.txt’ or ‘pdn_processing_M4.txt’ depending on the version of Mira you have installed.  The pipeline will prompt you for 4 variables.  First, enter the name of your project, which will serve as the name of your output folder.  Second, enter the prefix of your fastq input file, for example if your input is named ‘pipeline_input.fastq’ enter ‘pipeline_input’.  Third, enter the sequencing technology based on Mira3 syntax (i.e. ‘solexa’, ‘iontor’, etc).  Fourth, enter the full name of your reference genome in fasta format. 
+Choose ‘pdn_processing_M3.txt’ or ‘pdn_processing_M4.txt’ depending on the version of Mira you have installed.  The pipeline will prompt you for 4 variables.  First, enter the name of your project, which will serve as the name of your output folder.  Second, enter the prefix of your fastq input file, for example if your input is named ‘pipeline_input.fastq’ enter ‘pipeline_input’.  Third, enter the sequencing technology based on Mira syntax (i.e. ‘solexa’, ‘iontor’, etc).  Fourth, enter the full name of your reference genome in fasta format. 
 
 Along with our pipeline, we’ve included example data for E. coli:
 
