@@ -1,4 +1,4 @@
-#Prompts for input fastq sequence reads and reference genome.
+#Prompts for SAM alignment input files.
 echo "Please enter project name: "
 read project
 echo "Please enter genome SAM alignment file: "
