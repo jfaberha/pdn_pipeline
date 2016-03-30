@@ -6,7 +6,7 @@ The pseudo-denovo assembly pipeline was developed to discover and map sequences 
 
 The pipeline was originally used to re-analyze publicly available data to discover large sequences that were previously missed due to population-level and individual genomic variation and the nature of commonly used genome-resequencing pipelines.  For more information on the theory and suggestions of possible uses, please consult the following manuscripts. If you use this pipeline for published research, please cite each of these papers as well.
 
-Faber-Hammond, Joshua J., and Kim H. Brown. "Pseudo-De Novo Assembly and Analysis of Unmapped Genome Sequence Reads in Wild Zebrafish Reveal Novel Gene Content." Zebrafish (2016).
+Faber-Hammond, Joshua J., and Kim H. Brown. "Pseudo-De Novo Assembly and Analysis of Unmapped Genome Sequence Reads in Wild Zebrafish Reveal Novel Gene Content." Zebrafish 13.2 (2016): 95-102.
 
 (Bowtie)
 Langmead, Ben, et al. "Ultrafast and memory-efficient alignment of short DNA sequences to the human genome." Genome biol 10.3 (2009): R25.
