@@ -8,6 +8,8 @@ The pipeline was originally used to re-analyze publicly available data to discov
 
 Faber-Hammond, Joshua J., and Kim H. Brown. "Pseudo-De Novo Assembly and Analysis of Unmapped Genome Sequence Reads in Wild Zebrafish Reveal Novel Gene Content." Zebrafish 13.2 (2016): 95-102.
 
+Faber-Hammond, Joshua J., and Kim H. Brown. "Anchored pseudo-de novo assembly of human genomes identifies extensive sequence variation from unmapped sequence reads." Hum Genet. 2016 Jul;135(7):727-40.
+
 (Bowtie)
 Langmead, Ben, et al. "Ultrafast and memory-efficient alignment of short DNA sequences to the human genome." Genome biol 10.3 (2009): R25.
 
